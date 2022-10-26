@@ -99,3 +99,37 @@ def test_create_product_without_serie():
     assert data["detail"][0]["msg"] == "field required"
     assert data["detail"][0]["loc"] == ["body", "serie"]
     assert data["detail"][0]["type"] == "value_error.missing"
+
+
+def test_update_product_name():
+    PRODUCT = {
+        "name": "produto de teste 1 atualizado",
+    }
+
+    response = client.patch("/products/1", json=PRODUCT)
+
+    assert response.status_code == 204, response.text
+
+    response = client.get("/products/1")
+
+    assert response.status_code == 200, response.text
+    data = response.json()
+
+    assert data["name"] == PRODUCT["name"]
+
+
+def test_delete_product():
+
+    response = client.delete("/products/1")
+
+    assert response.status_code == 204, response.text
+
+    response = client.get("/products/1")
+
+    assert response.status_code == 404, response.text
+
+    response = client.get("/products/1")
+
+    assert response.status_code == 404, response.text
+    data = response.json()
+    assert data["detail"] == "Product not found"
