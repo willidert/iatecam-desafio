@@ -58,3 +58,44 @@ def test_create_category():
     data = response.json()
     assert "name" in data
     assert CATEGORY["name"] == data["name"]
+
+# add testes para os limites das entradas
+
+
+def test_create_product():
+    PRODUCT = {
+        "name": "produto de teste",
+        "price": 1500.10,
+        "serie": 3,
+        "category_id": 1
+    }
+
+    response = client.post("/products", json=PRODUCT)
+
+    assert response.status_code == 200, response.text
+
+    data = response.json()
+
+    assert "name" in data
+    assert data["name"] == PRODUCT["name"]
+    assert data["price"] == PRODUCT["price"]
+    assert data["serie"] == PRODUCT["serie"]
+
+
+def test_create_product_without_serie():
+    PRODUCT = {
+        "name": "produto de teste 1",
+        "price": 1500.10,
+        "category_id": 1
+    }
+
+    response = client.post("/products", json=PRODUCT)
+
+    assert response.status_code == 422, response.text
+
+    data = response.json()
+
+    assert "detail" in data
+    assert data["detail"][0]["msg"] == "field required"
+    assert data["detail"][0]["loc"] == ["body", "serie"]
+    assert data["detail"][0]["type"] == "value_error.missing"
