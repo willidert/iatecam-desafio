@@ -33,7 +33,7 @@ def list_categories(db: Session = Depends(get_db)):
 
 
 @app.post("/categories", response_model=schemas.Category)
-def create_product(category: schemas.CategoryCreate, db: Session = Depends(get_db)):
+def create_category(category: schemas.CategoryCreate, db: Session = Depends(get_db)):
     return service.create_category(db, category)
 
 
