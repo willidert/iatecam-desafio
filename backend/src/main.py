@@ -1,13 +1,11 @@
 from typing import List
 
 from fastapi import FastAPI, Depends
-from database import SessionLocal, engine
-import service
+from .database import SessionLocal, engine
 
 from sqlalchemy.orm import Session
 
-import schemas
-import models
+from . import schemas, models, service
 
 models.Base.metadata.create_all(bind=engine)  # retirar quando usar migrations
 
@@ -23,6 +21,17 @@ def get_db():
 
 
 @app.get("/products", response_model=List[schemas.Product])
-def read_root(db: Session = Depends(get_db)):
+def list_products(db: Session = Depends(get_db)):
     products = service.get_products(db)
     return products
+
+
+@app.get("/categories", response_model=List[schemas.Category])
+def list_categories(db: Session = Depends(get_db)):
+    categories = service.get_categories(db)
+    return categories
+
+
+@app.post("/categories", response_model=schemas.Category)
+def create_product(category: schemas.CategoryCreate, db: Session = Depends(get_db)):
+    return service.create_category(db, category)
