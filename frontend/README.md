@@ -2,6 +2,34 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.7.
 
+## Tecs
+
+- Material Design
+- Docker
+
+## Executando
+
+### sem docker
+
+**clone o projeto antes** e acesse a pasta `frontend`
+
+```sh
+npm i
+ng serve
+```
+
+A aplicação `frontend` rodará na porta 4200 ([acesse aqui](localhost:4200)).
+
+### com docker
+
+**clone o projeto antes**
+
+na raiz do projeto:
+
+```sh
+docker-compose up && docker-compose rm -fvs
+```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
