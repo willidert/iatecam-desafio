@@ -5,7 +5,7 @@ name: Python package
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "*" ]
   pull_request:
     branches: [ "master" ]
 
@@ -17,6 +17,17 @@ jobs:
       fail-fast: false
       matrix:
         python-version: ["3.8", "3.9", "3.10"]
+    
+    services:
+      postgres:
+        image: postgres:15.0-alpine
+        env:
+          POSTGRES_USER: iatecam
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: iatecam
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v3
@@ -37,5 +48,8 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
+      env:
+          SECRET_KEY: secret_key
+          SQLALCHEMY_DATABASE_URL: postgresql://iatecam:password@localhost/iatecam
       run: |
         pytest
