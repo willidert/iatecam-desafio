@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from fastapi import FastAPI, Depends, status
+from fastapi.middleware.cors import CORSMiddleware
 from .database import SessionLocal, engine
 
 from sqlalchemy.orm import Session
@@ -11,6 +12,15 @@ models.Base.metadata.create_all(bind=engine)  # retirar quando usar migrations
 
 app = FastAPI()
 
+origins = ["*"]
+
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"]
+)
 
 def get_db():
     db = SessionLocal()
