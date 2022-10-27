@@ -5,3 +5,13 @@ table {
 .example-spacer {
   flex: 1 1 auto;
 }
+
+.bnt-container {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-evenly;
+}
