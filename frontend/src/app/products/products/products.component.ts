@@ -1,7 +1,8 @@
-import { Observable } from 'rxjs';
-import { ProductsService } from './../services/products.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+
 import { Product } from '../model/product';
+import { ProductsService } from './../services/products.service';
 
 @Component({
   selector: 'app-products',
@@ -17,4 +18,16 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onAdd(): void {
+    console.log('on add.');
+  }
+
+  onDelete(product_id: number): void {
+    console.log(`item ${product_id} deletado.`);
+  }
+
+  onEdit(product_id: number): void {
+    console.log(`item ${product_id} editado.`);
+  }
 }

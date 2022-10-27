@@ -1,5 +1,16 @@
 <mat-card>
-  <mat-toolbar color="primary">Products</mat-toolbar>
+  <mat-toolbar color="primary" class="table-header">
+    <div>Products</div>
+    <div class="example-spacer"></div>
+    <button
+      mat-mini-fab
+      matTooltip="Create project"
+      matTooltipPosition="before"
+      aria-label="Create project"
+    >
+      <mat-icon (click)="onAdd()">add</mat-icon>
+    </button>
+  </mat-toolbar>
   <table mat-table [dataSource]="products" class="mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -7,13 +18,15 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.name | uppercase }}</td>
     </ng-container>
 
     <!-- Price Column -->
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef>Price</th>
-      <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.price | currency: "BRL" }}
+      </td>
     </ng-container>
 
     <!-- Serie Column -->
@@ -22,10 +35,45 @@
       <td mat-cell *matCellDef="let element">{{ element.serie }}</td>
     </ng-container>
 
-    <!-- Categoria Column -->
+    <!-- Category Column -->
     <ng-container matColumnDef="category_id">
-      <th mat-header-cell *matHeaderCellDef>Categoria</th>
+      <th mat-header-cell *matHeaderCellDef>Category</th>
       <td mat-cell *matCellDef="let element">{{ element.category_id }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="btn-row">
+          <div class="flex-container">
+            <div class="btn-container">
+              <button
+                mat-mini-fab
+                matTooltip="Delete product"
+                matTooltipPosition="before"
+                aria-label="Delete product"
+                color="warn"
+                (click)="onDelete(element.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div class="btn-container">
+              <button
+                mat-mini-fab
+                matTooltip="Edit product"
+                matTooltipPosition="before"
+                aria-label="Edit product"
+                color="primary"
+                (click)="onEdit(element.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
