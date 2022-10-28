@@ -10,7 +10,7 @@ import { ProductsService } from './../services/products.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  displayedColumns = ['name', 'serie', 'price', 'category_id'];
+  displayedColumns = ['name', 'serie', 'price', 'category_id', 'actions'];
   products: Observable<Product[]>;
   constructor(private service: ProductsService) {
     this.products = this.service.list();

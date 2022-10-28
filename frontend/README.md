@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Tecs
 
-- Material Design
-- Docker
+- [Angular Material](https://material.angular.io)
+- [Docker](https://www.docker.com)
 
 ## Executando
 
