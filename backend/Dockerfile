@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY ./src /app/src
 
-ENV PYTHONPATH /src
+# ENV PYTHONPATH src/
 
 EXPOSE 8000
 

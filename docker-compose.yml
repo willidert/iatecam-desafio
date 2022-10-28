@@ -8,7 +8,7 @@ services:
       - 443:443
       - 4200:4200
     volumes:
-      - ./web:/app
+      - ./frontend:/app
       - /app/node_modules
     networks:
       - app-network
@@ -18,10 +18,12 @@ services:
   api:
     build: ./backend
     container_name: api
+    depends_on:
+      - db
     ports:
       - 8000:8000
     volumes:
-      - ./api/:/app
+      - ./backend/:/app
     networks:
       - app-network
     env_file:
