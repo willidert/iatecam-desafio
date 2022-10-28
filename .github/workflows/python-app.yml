@@ -49,7 +49,9 @@ jobs:
       - name: Test with pytest
         env:
           SECRET_KEY: secret_key
-          PYTHON_MODE: dev
-          SQLALCHEMY_DATABASE_URL: postgresql://iatecam:password@localhost/iatecam
+          POSTGRES_SERVER: db
+          POSTGRES_USER: iatecam
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: iatecam
         run: |
           pytest
