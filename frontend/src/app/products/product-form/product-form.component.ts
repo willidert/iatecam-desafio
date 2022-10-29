@@ -1,9 +1,12 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 import { ProductsService } from '../services/products.service';
+import { Category } from './../../categories/model/category';
+import { CategoriesService } from './../../categories/services/categories.service';
 import { Product } from './../model/product';
 
 @Component({
@@ -12,47 +15,52 @@ import { Product } from './../model/product';
   styleUrls: ['./product-form.component.scss'],
 })
 export class ProductFormComponent implements OnInit {
-  product: Product = { name: '', price: 0, serie: 0, category_id: 0 };
+  productForm: FormGroup;
 
-  productForm: FormGroup<{
-    name: FormControl<string>;
-    serie: FormControl<number>;
-    price: FormControl<number>;
-    category_id: FormControl<number>;
-  }>;
-
-  categories = [
-    { id: 1, name: 'categoria 1' },
-    { id: 2, name: 'categoria 3' },
-    { id: 3, name: 'categoria 2' },
-  ];
+  categories: Category[] = [];
 
   constructor(
     private productService: ProductsService,
+    private categoryService: CategoriesService,
     private location: Location,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private route: ActivatedRoute
   ) {
     this.productForm = new FormGroup({
-      name: new FormControl(this.product.name, {
+      id: new FormControl('', { nonNullable: true }),
+      name: new FormControl('', {
         validators: [Validators.required, Validators.maxLength(60)],
         nonNullable: true,
       }),
-      serie: new FormControl(this.product.serie, {
+      serie: new FormControl(0, {
         validators: [Validators.required],
         nonNullable: true,
       }),
-      price: new FormControl(this.product.price, {
+      price: new FormControl(0, {
         validators: [Validators.required],
         nonNullable: true,
       }),
-      category_id: new FormControl(this.product.category_id, {
+      category_id: new FormControl<number | null>(null, {
         validators: [Validators.required],
-        nonNullable: true,
       }),
     });
+
+    this.categoryService.list().subscribe((data) => (this.categories = data));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const product: Product = this.route.snapshot.data['product'];
+
+    this.productForm.setValue({
+      id: product.id,
+      name: product.name,
+      category_id: product.category_id,
+      serie: product.serie,
+      price: product.price,
+    });
+
+    this.categoryService.list().subscribe((data) => (this.categories = data));
+  }
 
   onSubmit() {
     this.productService.save(this.productForm.value).subscribe(
@@ -60,7 +68,6 @@ export class ProductFormComponent implements OnInit {
       // (result) => this.onSucess()
       // (error) => this.onError()
     );
-    this.onCancel();
   }
 
   onCancel(): void {
@@ -69,6 +76,7 @@ export class ProductFormComponent implements OnInit {
 
   private onSucess(): void {
     this.snack.open('Product saved!', '', { duration: 3000 });
+    this.onCancel();
   }
 
   private onError(): void {
