@@ -1,12 +1,12 @@
 <mat-card>
-  <mat-toolbar color="primary" class="table-header">
+  <mat-toolbar color="primary">
     <div>Products</div>
     <div class="example-spacer"></div>
     <button
       mat-mini-fab
-      matTooltip="Create project"
+      matTooltip="Create product"
       matTooltipPosition="before"
-      aria-label="Create project"
+      aria-label="Create product"
     >
       <mat-icon (click)="onAdd()">add</mat-icon>
     </button>
@@ -49,7 +49,7 @@
           <div class="flex-container">
             <div class="btn-container">
               <button
-                mat-mini-fab
+                mat-icon-button
                 matTooltip="Delete product"
                 matTooltipPosition="before"
                 aria-label="Delete product"
@@ -61,7 +61,7 @@
             </div>
             <div class="btn-container">
               <button
-                mat-mini-fab
+                mat-icon-button
                 matTooltip="Edit product"
                 matTooltipPosition="before"
                 aria-label="Edit product"
