@@ -1,0 +1,20 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.btn {
+  color: #fff;
+  &:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.active-tab {
+  background: rgba(0, 0, 0, 0.4);
+}
