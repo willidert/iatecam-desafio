@@ -11,7 +11,7 @@ import { ProductsService } from './../services/products.service';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  displayedColumns = ['name', 'price', 'category_id', 'serie', 'actions'];
+  displayedColumns = ['name', 'category_id', 'price', 'serie', 'actions'];
   products: Observable<Product[]>;
   constructor(
     private service: ProductsService,
@@ -19,7 +19,6 @@ export class ProductsComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.products = this.service.list();
-    console.log(this.products);
   }
 
   ngOnInit(): void {
@@ -31,10 +30,16 @@ export class ProductsComponent implements OnInit {
   }
 
   onDelete(product_id: number): void {
-    console.log(`item ${product_id} deletado.`);
+    if (confirm('Delete?')) {
+      this.service.delete(product_id).subscribe(() => {
+        this.products = this.service.list();
+        console.log(`item ${product_id} deletado.`);
+      });
+    }
   }
 
   onEdit(product_id: number): void {
+    this.router.navigate(['edit', product_id], { relativeTo: this.route });
     console.log(`item ${product_id} editado.`);
   }
 }
