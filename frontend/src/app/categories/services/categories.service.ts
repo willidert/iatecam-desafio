@@ -17,13 +17,16 @@ export class CategoriesService {
 
   save(category: Partial<Category>): Observable<Category> {
     if (category.id) {
-      this.update(category);
+      return this.update(category);
     }
     return this.create(category);
   }
 
+  getById(id: string) {
+    return this.client.get<Category>(`${this.API_URL}/${id}`);
+  }
+
   private create(category: Partial<Category>) {
-    console.log(category);
     return this.client.post<Category>(this.API_URL, category);
   }
 
