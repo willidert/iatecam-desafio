@@ -1,5 +1,22 @@
 <mat-toolbar color="primary">
   <span>Desafio IATECAM</span>
+  <span class="example-spacer"></span>
+  <div class="flex-container">
+    <a
+      mat-button
+      routerLinkActive="active-tab"
+      routerLink="categories"
+      class="btn"
+      >Categories</a
+    >
+    <a
+      mat-button
+      routerLinkActive="active-tab"
+      routerLink="products"
+      class="btn"
+      >Products</a
+    >
+  </div>
 </mat-toolbar>
 
 <router-outlet></router-outlet>
