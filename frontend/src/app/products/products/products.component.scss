@@ -7,6 +7,15 @@
   flex: 0 0 55px;
 }
 
+.md-column {
+  flex: 0 0 80px;
+  justify-content: center;
+}
+
+.md-column-header {
+  flex: 0 0 80px;
+}
+
 .mat-card {
   max-width: 80%;
   margin: 2rem auto;
