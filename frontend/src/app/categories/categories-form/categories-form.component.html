@@ -1,0 +1,27 @@
+<mat-card>
+  <form [formGroup]="categoryForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Product name</mat-label>
+      <input
+        matInput
+        #input
+        maxlength="128"
+        formControlName="name"
+        placeholder="Ex. My Product"
+      />
+      <mat-hint align="end">{{ input.value.length || 0 }}/128</mat-hint>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <div class="flex-container">
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          Save
+        </button>
+
+        <button mat-raised-button color="warn" (click)="onCancel()">
+          Cancel
+        </button>
+      </div>
+    </mat-card-actions>
+  </form></mat-card
+>
