@@ -1,6 +1,6 @@
 # API
 
-Projeto para o desafio fullstack junior - iadecam
+Projeto para a vaga de Fullstack jr
 
 ## Tecs
 
@@ -36,11 +36,7 @@ A api pode ser acessada na porta 8000 ([acesse aqui](http://localhost:8000/produ
 
 ### com docker
 
-Na raiz do projeto:
-
-```sh
-docker-compose up && docker-compose rm -fvs
-```
+Seguir as instruções no [README.md](https://github.com/willidert/iatecam-desafio#docker) da raiz.
 
 ## Testes
 
@@ -49,3 +45,12 @@ Implementei alguns testes na api que podem ser executados com:
 ```sh
 pytest
 ```
+
+## Demonstração
+
+Se não conseguir ou não desejar subir os serviços, eles estão disponíveis:
+
+| service | Tecnology |                          URL                           |
+| ------- | :-------: | :----------------------------------------------------: |
+| web     |  Angular  |    [clique aqui](https://iatecam-frontend.web.app/)    |
+| api     |  Fastapi  | [clique aqui](https://crud-iatecam.herokuapp.com/docs) |

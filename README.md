@@ -1,5 +1,14 @@
 # Desafio iatecam
 
+Projeto para a vaga de Fullstack jr
+
+## Diferencias
+
+- [x] Deploy
+- [x] CI
+- [x] Docker
+- [x] Testes para a api
+
 ## Executando
 
 ### Docker
@@ -108,3 +117,12 @@ npm run start
 | ------- | :-------: | :---------------------------------------: |
 | web     |  Angular  |      [clique aqui](http://localhost)      |
 | api     |  Fastapi  | [clique aqui](http://localhost:8000/docs) |
+
+## Demonstração
+
+Se não conseguir ou não desejar subir os serviços, eles estão disponíveis:
+
+| service | Tecnology |                          URL                           |
+| ------- | :-------: | :----------------------------------------------------: |
+| web     |  Angular  |    [clique aqui](https://iatecam-frontend.web.app/)    |
+| api     |  Fastapi  | [clique aqui](https://crud-iatecam.herokuapp.com/docs) |
