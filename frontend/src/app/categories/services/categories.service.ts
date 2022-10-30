@@ -26,6 +26,10 @@ export class CategoriesService {
     return this.client.get<Category>(`${this.API_URL}/${id}`);
   }
 
+  delete(id: string) {
+    return this.client.get(`${this.API_URL}/${id}`);
+  }
+
   private create(category: Partial<Category>) {
     return this.client.post<Category>(this.API_URL, category);
   }
