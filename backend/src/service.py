@@ -54,6 +54,15 @@ def create_product(db: Session, product: schemas.ProductCreate) -> schemas.Produ
     return db_product
 
 
+def get_category_by_id(db: Session, id: int) -> schemas.Category or None:
+    category = db.query(Category).filter(
+        Category.id == id).first()
+    if category is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+    return category
+
+
 def get_product_by_id(db: Session, product_id: int) -> schemas.Product or None:
     product = db.query(Product).filter(
         Product.id == product_id).first()
