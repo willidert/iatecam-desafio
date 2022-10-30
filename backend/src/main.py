@@ -2,25 +2,24 @@ from typing import List, Optional
 
 from fastapi import FastAPI, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
-from .database import SessionLocal, engine
+from src.db.session import SessionLocal
 
 from sqlalchemy.orm import Session
 
-from . import schemas, models, service
-
-models.Base.metadata.create_all(bind=engine)  # retirar quando usar migrations
+from . import schemas, service
 
 app = FastAPI()
 
 origins = ["*"]
 
 app.add_middleware(
-        CORSMiddleware,
-        allow_origins=origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"]
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
 )
+
 
 def get_db():
     db = SessionLocal()
@@ -41,7 +40,7 @@ def create_category(category: schemas.CategoryCreate, db: Session = Depends(get_
     return service.create_category(db, category)
 
 
-@app.get("/products", response_model=List[schemas.Product])
+@app.get("/products", response_model=List[schemas.ProductOut])
 def list_products(db: Session = Depends(get_db)):
     products = service.get_products(db)
     return products
