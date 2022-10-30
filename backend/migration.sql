@@ -33,5 +33,11 @@ CREATE INDEX ix_products_id ON products (id);
 
 UPDATE alembic_version SET version_num='8d907b43a43b' WHERE alembic_version.version_num = '0871b66f06be';
 
+-- Running upgrade 8d907b43a43b -> 5e57a3407e9f
+
+ALTER TABLE categories ADD COLUMN is_deleted BOOLEAN NOT NULL;
+
+UPDATE alembic_version SET version_num='5e57a3407e9f' WHERE alembic_version.version_num = '8d907b43a43b';
+
 COMMIT;
 
