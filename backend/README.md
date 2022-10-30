@@ -32,7 +32,7 @@ pip install -r requirements.txt
 uvicorn src.main:app --reload
 ```
 
-A api pode ser acessada na porta 8000 ([acesse aqui](localhost:8000/products)).
+A api pode ser acessada na porta 8000 ([acesse aqui](http://localhost:8000/products)).
 
 ### com docker
 

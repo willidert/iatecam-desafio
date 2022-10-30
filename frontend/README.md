@@ -18,17 +18,17 @@ npm i
 ng serve
 ```
 
-A aplicação `frontend` rodará na porta 4200 ([acesse aqui](localhost:4200)).
+A aplicação `frontend` rodará na porta 4200 ([acesse aqui](http://localhost:4200)).
 
 ### com docker
 
-**clone o projeto antes**
-
-na raiz do projeto:
+**clone o projeto antes** na raiz do projeto:
 
 ```sh
 docker-compose up && docker-compose rm -fvs
 ```
+
+A aplicação `frontend` rodará na porta 80 por causa do nginx ([acesse aqui](http://localhost)).
 
 ## Development server
 

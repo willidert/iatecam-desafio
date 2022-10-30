@@ -52,11 +52,11 @@ Feito isso podemos subir o frontend e a api novamente:
 docker-compose up web api && docker-compose rm -fvs
 ```
 
-| service | Tecnology |                    URL                    |
-| ------- | :-------: | :---------------------------------------: |
-| web     |  Angular  |      [clique aqui](http://localhost)      |
-| api     |  Fastapi  | [clique aqui](http://localhost:8000/docs) |
-| db      | Postgres  |         executando na porta 5432          |
+| service |    Tecnology    |                    URL                    |
+| ------- | :-------------: | :---------------------------------------: |
+| web     | Angular e Nginx |      [clique aqui](http://localhost)      |
+| api     |     Fastapi     | [clique aqui](http://localhost:8000/docs) |
+| db      |    Postgres     |         executando na porta 5432          |
 
 ### Sem docker
 
