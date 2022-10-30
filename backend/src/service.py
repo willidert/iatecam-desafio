@@ -15,7 +15,27 @@ def create_category(db: Session, category: schemas.CategoryCreate) -> schemas.Ca
 
 
 def get_categories(db: Session, skip: int = 0, limit: int = 100) -> List[schemas.Category]:
-    return db.query(Category).offset(skip).limit(limit).all()
+    return db.query(Category).filter_by(is_deleted=False).offset(skip).limit(limit).all()
+
+
+def get_category_by_id(db: Session, id: int) -> schemas.Category or None:
+    category = db.query(Category).filter(
+        Category.id == id).first()
+    return category
+
+
+def update_category(db: Session, category: schemas.Category, id: int) -> None:
+    db.query(Category).filter(Category.id ==
+                              id).update(category.dict(exclude_unset=True))
+    db.commit()
+    return
+
+
+def delete_category(db: Session, id: int) -> None:
+    category = get_category_by_id(db, id)
+    category.is_deleted = True
+    db.commit()
+    return
 
 
 def get_products(db: Session, skip: int = 0, limit: int = 100) -> List[schemas.ProductOut]:

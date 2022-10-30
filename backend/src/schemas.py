@@ -49,6 +49,10 @@ class ProductUpdate(ProductBase):
     category_id: Optional[int]
 
 
+class CategoryUpdate(CategoryBase):
+    name: Optional[constr(max_length=128)]
+
+
 class CategoryCreate(CategoryBase):
     pass
 

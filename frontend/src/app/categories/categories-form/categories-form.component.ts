@@ -47,7 +47,7 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private onSucess() {
-    this.snack.open('Category saved');
+    this.snack.open('Category saved', '', { duration: 3000 });
     this.onCancel();
   }
 

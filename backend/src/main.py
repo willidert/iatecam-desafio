@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from fastapi import FastAPI, Depends, status
+from fastapi import FastAPI, Depends, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from src.db.session import SessionLocal
 
@@ -40,6 +40,33 @@ def create_category(category: schemas.CategoryCreate, db: Session = Depends(get_
     return service.create_category(db, category)
 
 
+@app.get("/categories/{category_id}", response_model=Optional[schemas.Category])
+def get_category_by_id(category_id: int, db: Session = Depends(get_db)):
+    res = service.get_category_by_id(db, category_id)
+    if res is None or res.is_deleted:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
+    return res
+
+
+@app.patch("/categories/{category_id}", status_code=status.HTTP_204_NO_CONTENT)
+def update_category(category_id: int, category: schemas.CategoryUpdate, db: Session = Depends(get_db)):
+    res = service.get_category_by_id(db, category_id)
+    if res is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
+    return service.update_category(db, category, category_id)
+
+
+@app.delete("/categories/{category_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_category(category_id: int, db: Session = Depends(get_db)):
+    res = service.get_category_by_id(db, category_id)
+    if ((res is None) or (res.is_deleted)):
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
+    return service.delete_category(db, category_id)
+
+
 @app.get("/products", response_model=List[schemas.ProductOut])
 def list_products(db: Session = Depends(get_db)):
     products = service.get_products(db)
@@ -48,16 +75,28 @@ def list_products(db: Session = Depends(get_db)):
 
 @app.post("/products", response_model=schemas.Product)
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
+    res = service.get_category_by_id(db, product.category_id)
+    if res is None or res.is_deleted:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid category_id")
     return service.create_product(db, product)
 
 
 @app.get("/products/{product_id}", response_model=Optional[schemas.Product])
 def get_product_by_id(product_id: int, db: Session = Depends(get_db)):
-    return service.get_product_by_id(db, product_id)
+    res = service.get_product_by_id(db, product_id)
+    if res is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
+    return res
 
 
 @app.patch("/products/{product_id}", status_code=status.HTTP_204_NO_CONTENT)
 def update_product(product_id: int, product: schemas.ProductUpdate, db: Session = Depends(get_db)):
+    res = service.get_product_by_id(db, product_id)
+    if res is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return service.update_product(db, product, product_id)
 
 
