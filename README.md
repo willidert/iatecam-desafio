@@ -52,9 +52,11 @@ Feito isso podemos subir o frontend e a api novamente:
 docker-compose up web api && docker-compose rm -fvs
 ```
 
-|web | Angular | [clique aqui](localhost)|
-|api | Fastapi | [clique aqui](localhost:8000/docs) |
-| db | Postgres | executando na porta 5432 |
+| service | Tecnology |                    URL                    |
+| ------- | :-------: | :---------------------------------------: |
+| web     |  Angular  |      [clique aqui](http://localhost)      |
+| api     |  Fastapi  | [clique aqui](http://localhost:8000/docs) |
+| db      | Postgres  |         executando na porta 5432          |
 
 ### Sem docker
 
@@ -102,5 +104,7 @@ E o comando para executar é:
 npm run start
 ```
 
-|web | Angular | [clique aqui](localhost)|
-|api | Fastapi | [clique aqui](localhost:8000/docs) |
+| service | Tecnology |                    URL                    |
+| ------- | :-------: | :---------------------------------------: |
+| web     |  Angular  |      [clique aqui](http://localhost)      |
+| api     |  Fastapi  | [clique aqui](http://localhost:8000/docs) |
