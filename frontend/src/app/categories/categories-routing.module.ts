@@ -1,3 +1,5 @@
+
+import { CategoriesResolver } from './guards/categories.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -6,7 +8,16 @@ import { CategoriesComponent } from './categories/categories.component';
 
 const routes: Routes = [
   { path: '', component: CategoriesComponent },
-  { path: 'create', component: CategoriesFormComponent },
+  {
+    path: 'create',
+    component: CategoriesFormComponent,
+    resolve: { category: CategoriesResolver },
+  },
+  {
+    path: 'edit/:id',
+    component: CategoriesFormComponent,
+    resolve: { category: CategoriesResolver },
+  },
 ];
 
 @NgModule({

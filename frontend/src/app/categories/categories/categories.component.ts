@@ -29,7 +29,11 @@ export class CategoriesComponent implements OnInit {
     this.router.navigate(['create'], { relativeTo: this.route });
   }
 
-  onEdit(category: Category): void {
-    this.router.navigate(['edit', category.id], { relativeTo: this.route });
+  onEdit(id: string): void {
+    this.router.navigate(['edit', id], { relativeTo: this.route });
+  }
+
+  onDelete(id: string) {
+    console.log(`category ${id} deleted`);
   }
 }

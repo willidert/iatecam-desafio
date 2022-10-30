@@ -1,6 +1,22 @@
-table {
-  width: 100%;
+.sm-column-header {
+  flex: 0 0 55px;
 }
+
+.action-column {
+  flex: 0 0 75px;
+  justify-content: center;
+}
+
+.mat-card {
+  max-width: 80%;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
 
 .example-spacer {
   flex: 1 1 auto;

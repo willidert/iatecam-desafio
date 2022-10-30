@@ -18,7 +18,26 @@ export class ProductsService {
     return this.client.get<Product[]>(this.API_URL);
   }
 
+  getById(id: number) {
+    return this.client.get<Product>(`${this.API_URL}/${id}`);
+  }
+
   save(product: Partial<Product>): Observable<Product> {
+    if (product.id) {
+      return this.update(product);
+    }
+    return this.create(product);
+  }
+
+  delete(id: number) {
+    return this.client.delete(`${this.API_URL}/${id}`);
+  }
+
+  private create(product: Partial<Product>) {
     return this.client.post<Product>(this.API_URL, product);
+  }
+
+  private update(product: Partial<Product>) {
+    return this.client.patch<Product>(`${this.API_URL}/${product.id}`, product);
   }
 }
