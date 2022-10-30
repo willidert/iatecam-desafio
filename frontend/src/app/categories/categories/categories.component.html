@@ -11,22 +11,38 @@
       <mat-icon (click)="onAdd()">add</mat-icon>
     </button>
   </mat-toolbar>
-  <table mat-table [dataSource]="categories" class="mat-elevation-z8">
+  <mat-table [dataSource]="categories" class="flex-column mat-elevation-z8">
     <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name | uppercase }}</td>
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{
+        element.name | uppercase
+      }}</mat-cell>
     </ng-container>
 
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let element">
+      <mat-header-cell *matHeaderCellDef class="sm-column-header"
+        >Actions</mat-header-cell
+      >
+      <mat-cell *matCellDef="let element" class="action-column">
         <div class="btn-row">
           <div class="flex-container">
+            <div class="btn-container">
+              <button
+                mat-icon-button
+                matTooltip="Delete product"
+                matTooltipPosition="before"
+                aria-label="Delete product"
+                color="warn"
+                (click)="onDelete(element.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
             <div class="btn-container">
               <button
                 mat-icon-button
@@ -41,10 +57,10 @@
             </div>
           </div>
         </div>
-      </td>
+      </mat-cell>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
 </mat-card>

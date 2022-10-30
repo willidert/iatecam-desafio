@@ -1,13 +1,13 @@
 <mat-card>
   <form [formGroup]="categoryForm">
     <mat-form-field appearance="outline" class="full-width">
-      <mat-label>Product name</mat-label>
+      <mat-label>Category name</mat-label>
       <input
         matInput
         #input
         maxlength="128"
         formControlName="name"
-        placeholder="Ex. My Product"
+        placeholder="Ex. My Category"
       />
       <mat-hint align="end">{{ input.value.length || 0 }}/128</mat-hint>
     </mat-form-field>
