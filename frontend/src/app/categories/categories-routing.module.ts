@@ -1,3 +1,4 @@
+
 import { CategoriesResolver } from './guards/categories.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
