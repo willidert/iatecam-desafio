@@ -18,6 +18,18 @@ def get_categories(db: Session, skip: int = 0, limit: int = 100) -> List[schemas
     return db.query(Category).offset(skip).limit(limit).all()
 
 
+def get_category(db: Session, id: int) -> schemas.Category or None:
+    category = db.query(Category).filter(Category.id == id).first()
+    return category
+
+
+def update_category(db: Session, category: schemas.Category, id: int) -> None:
+    db.query(Category).filter(Category.id ==
+                              id).update(category.dict(exclude_unset=True))
+    db.commit()
+    return
+
+
 def get_products(db: Session, skip: int = 0, limit: int = 100) -> List[schemas.ProductOut]:
     res = db.query(Product).offset(skip).limit(limit).all()
     # res = db.query(Product).join(
@@ -37,9 +49,6 @@ def create_product(db: Session, product: schemas.ProductCreate) -> schemas.Produ
 def get_category_by_id(db: Session, id: int) -> schemas.Category or None:
     category = db.query(Category).filter(
         Category.id == id).first()
-    if category is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Product not found")
     return category
 
 
